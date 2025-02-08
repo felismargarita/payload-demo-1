@@ -1,3 +1,4 @@
+import { ApiError } from 'next/dist/server/api-utils'
 import type { CollectionConfig } from 'payload'
 
 export const DraftTest: CollectionConfig = {
@@ -19,4 +20,11 @@ export const DraftTest: CollectionConfig = {
       type: 'text',
     },
   ],
+  hooks: {
+    afterChange: [
+      (x) => {
+        throw new ApiError(400, 'test');
+      }
+    ]
+  }
 }
